@@ -1,0 +1,43 @@
+<div class="container">
+  <form class="px-8 py-1">
+    <div class="p-fluid">
+      <h3>Nome</h3>
+      <input type="text" readonly [disabled]="true" value="{{ hospital.nome }}" id="nome" pInputText />
+    </div>
+    <div class="p-fluid">
+      <h3>Telefone</h3>
+      <input type="text" readonly [disabled]="true" value="{{ hospital.telefone }}" id="telefone" pInputText />
+    </div>
+    <h3>Endereço</h3>
+    <div class="p-grid p-fluid">
+      <div class="my-2 p-inputgroup">
+        <label for="rua" class="p-inputgroup-addon">Rua</label>
+        <input type="text" readonly [disabled]="true" value="{{ hospital.endereco?.rua }}" id="rua" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="numero" class="p-inputgroup-addon">Numero</label>
+        <input type="text" readonly [disabled]="true" value="{{ hospital.endereco?.numero }}" id="numero" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="bairro" class="p-inputgroup-addon">Bairro</label>
+        <input type="text" readonly [disabled]="true" value="{{ hospital.endereco?.bairro }}" id="bairro" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="cidade" class="p-inputgroup-addon">Cidade</label>
+        <input type="text" readonly [disabled]="true" value="{{ hospital.endereco?.cidade }}" id="cidade" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="estado" class="p-inputgroup-addon">UF</label>
+        <input type="text" readonly [disabled]="true" value="{{ hospital.endereco?.estado }}" id="estado" pInputText />
+      </div>
+    </div>
+    <div class="p-fluid">
+      <h4>Profissionais</h4>
+      <p-listbox [options]="hospital.profissionais" [filter]="true" [readonly]="true" optionLabel="nome"></p-listbox>
+    </div>
+    <br />
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="button" (click)="inicio()" label="Voltar" class="p-button-info"></button>
+    </div>
+  </form>
+</div>

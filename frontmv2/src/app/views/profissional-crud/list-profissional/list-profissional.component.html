@@ -1,0 +1,47 @@
+<p-toast></p-toast>
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <p-button class="buttonNew" label="Criar novo profissional" icon="pi pi-plus" styleClass="p-button-success" (click)="newProfissional()">
+    </p-button>
+  </div>
+</p-toolbar>
+
+<p-table #dt [value]="profissionais"  [globalFilterFields]="['nome']" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true">
+  <ng-template pTemplate="caption">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      <h3 class="p-m-0">Gerenciamento de Profissional</h3>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Procurar por nome..." />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Cargo</th>
+      <th>Endereço</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-profissional>
+    <tr>
+      <td>{{profissional.id}}</td>
+      <td>{{profissional.nome}}</td>
+      <td>{{profissional.telefone}}</td>
+      <td>{{profissional.cargo}}</td>
+      <td>{{profissional.endereco?.rua}} {{profissional.endereco?.numero}} {{profissional.endereco?.bairro}} {{profissional.endereco?.cidade}} {{profissional.endereco?.estado}}</td>
+      <td >
+        <button pButton pRipple icon="pi pi-search" label="Ver" class="p-button-rounded p-button-info"
+          (click)="viewProfissional(profissional)"></button>
+        <button pButton pRipple icon="pi pi-pencil" label="Editar" class="p-button-rounded p-button-success p-mr-2"
+          (click)="editProfissional(profissional)"></button>
+        <button pButton pRipple icon="pi pi-trash" label="Excluir" class="p-button-rounded p-button-warning"
+          (click)="deleteProfissional(profissional)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog header="Confirmação"  icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -1,0 +1,58 @@
+<div class="container">
+    <form class="px-8 py-1" [formGroup]="profissionalFormulario" (ngSubmit)="editFormSubmit()">
+      <div class="p-fluid">
+        <h4>Nome</h4>
+        <span class="p-input-icon-right">
+          <input type="text" value="{{ profissional.nome }}" formControlName="nome" pInputText />
+        </span>
+      </div>
+      <div class="p-fluid">
+        <h4>Telefone</h4>
+        <span class="p-input-icon-right">
+          <input type="text" value="{{ profissional.telefone }}" pInputText formControlName="telefone" />
+        </span>
+      </div>
+      <div class="p-fluid">
+        <h4>Cargo</h4>
+        <span class="p-input-icon-right">
+          <input type="text" value="{{ profissional.cargo }}" pInputText formControlName="cargo" />
+        </span>
+      </div>
+    
+      <h3>Endereço</h3>
+      <div class="p-grid p-fluid">
+        <div class="my-2 p-inputgroup">
+          <label for="rua" class="p-inputgroup-addon">Rua</label>
+          <input type="text" value="{{ profissional.endereco?.rua }}" id="rua" formControlName="rua" pInputText />
+        </div>
+        <div class="my-2 p-inputgroup">
+          <label for="numero" class="p-inputgroup-addon">Numero</label>
+          <input type="text" value="{{ profissional.endereco?.numero }}" id="numero" formControlName="numero" pInputText />
+        </div>
+        <div class="my-2 p-inputgroup">
+          <label for="bairro" class="p-inputgroup-addon">Bairro</label>
+          <input type="text" value="{{ profissional.endereco?.bairro }}" id="bairro" formControlName="bairro" pInputText />
+        </div>
+        <div class="my-2 p-inputgroup">
+          <label for="cidade" class="p-inputgroup-addon">Cidade</label>
+          <input type="text" value="{{ profissional.endereco?.cidade }}" id="cidade" formControlName="cidade" pInputText />
+        </div>
+        <div class="my-2 p-inputgroup">
+          <label for="estado" class="p-inputgroup-addon">UF</label>
+          <input type="text" value="{{ profissional.endereco?.estado }}" id="estado" formControlName="estado" pInputText />
+        </div>
+      </div>
+      <div class="p-fluid">
+        <h3>Hospitais</h3>
+        <p-listbox [options]="hospitais" [multiple]="true" [checkbox]="true" formControlName="hospitais" optionLabel="nome" optionValue="id"></p-listbox>
+      </div>
+      <br>
+      <div class="mx-8 mt-4 p-fluid">
+        <button pButton pRipple type="submit" label="Editar Profissional" class="p-button-success"></button>
+      </div>
+      <br>
+      <div class="mx-8 mt-4 p-fluid">
+        <button pButton pRipple type="button" (click)="inicio()" label="Voltar" class="p-button-info"></button>
+      </div>
+    </form>
+    </div>

@@ -1,0 +1,51 @@
+<div class="container">
+  <form class="px-8 py-1" [formGroup]="hospitalFormulario" (ngSubmit)="saveHospital()">
+    <div class="p-fluid" formGroupname="hospitalFormulario">
+      <h3>Nome</h3>
+      <input type="text" value="{{ hospitalFormulario.value.nome }}" id="nome" formControlName="nome" pInputText
+        required />
+    </div>
+    <div class="p-fluid">
+      <h3>Telefone</h3>
+      <input type="text" placeholder="11 91111-1111" value="{{ hospitalFormulario.value.telefone }}" id="telefone"
+        pInputText formControlName="telefone" />
+    </div>
+    <h3>Endereço</h3>
+    <div class="p-grid p-fluid">
+      <div class="my-2 p-inputgroup">
+        <label for="rua" class="p-inputgroup-addon">Rua</label>
+        <input type="text" value="{{ hospitalFormulario.value.endereco?.rua }}" id="rua" formControlName="rua" pInputText
+          required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="numero" class="p-inputgroup-addon">Numero</label>
+        <input type="text" value="{{ hospitalFormulario.value.endereco?.numero }}" id="numero" formControlName="numero" pInputText
+          required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="bairro" class="p-inputgroup-addon">Bairro</label>
+        <input type="text" value="{{ hospitalFormulario.value.endereco?.bairro }}" id="bairro" formControlName="bairro" pInputText
+          required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="cidade" class="p-inputgroup-addon">Cidade</label>
+        <input type="text" value="{{ hospitalFormulario.value.endereco?.cidade }}" id="cidade" formControlName="cidade" pInputText
+          required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="estado" class="p-inputgroup-addon">UF</label>
+        <input type="text" placeholder="SP" value="{{ hospitalFormulario.value.endereco?.estado }}" id="estado"
+          formControlName="estado" pInputText required />
+      </div>
+    </div>
+    <br>
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="submit" label="Criar Hospital" class="p-button-success"></button>
+    </div>
+    <br>
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="button" (click)="inicio()" (click)="resetForm()" label="Voltar"
+        class="p-button-info"></button>
+    </div>
+  </form>
+</div>

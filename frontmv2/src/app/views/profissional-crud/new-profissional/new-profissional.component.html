@@ -1,0 +1,60 @@
+<div class="container">
+  <form class="px-8 py-1" [formGroup]="profissionalFormulario" (ngSubmit)="saveProfissional()">
+    <div class="p-fluid" formGroupname="profissionalFormulario">
+      <h3>Nome</h3>
+      <input type="text" value="{{ profissionalFormulario.value.nome }}" id="nome" formControlName="nome" pInputText
+        required />
+    </div>
+    <div class="p-fluid">
+      <h3>Telefone</h3>
+      <input type="text" placeholder="11 91111-1111" value="{{ profissionalFormulario.value.telefone }}" id="telefone"
+        pInputText formControlName="telefone" />
+    </div>
+    <div class="p-fluid">
+      <h3>Cargo</h3>
+      <input type="text" value="{{ profissionalFormulario.value.cargo }}" id="cargo" pInputText
+        formControlName="cargo" />
+    </div>
+    <h3>Endereço</h3>
+    <div class="p-grid p-fluid">
+      <div class="my-2 p-inputgroup">
+        <label for="rua" class="p-inputgroup-addon">Rua</label>
+        <input type="text" value="{{ profissionalFormulario.value.endereco?.rua }}" id="rua" formControlName="rua" pInputText
+          required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="numero" class="p-inputgroup-addon">Numero</label>
+        <input type="text" value="{{ profissionalFormulario.value.endereco?.numero }}" id="numero" formControlName="numero"
+          pInputText required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="bairro" class="p-inputgroup-addon">Bairro</label>
+        <input type="text" value="{{ profissionalFormulario.value.endereco?.bairro }}" id="bairro" formControlName="bairro"
+          pInputText required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="cidade" class="p-inputgroup-addon">Cidade</label>
+        <input type="text" value="{{ profissionalFormulario.value.endereco?.cidade }}" id="cidade" formControlName="cidade"
+          pInputText required />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="estado" class="p-inputgroup-addon">UF</label>
+        <input type="text" placeholder="SP" value="{{ profissionalFormulario.value.endereco?.estado }}" id="estado"
+          formControlName="estado" pInputText required />
+      </div>
+    </div>
+    <div class="p-fluid">
+      <h3>Hospitais</h3>
+      <p-listbox [options]="hospitais" [multiple]="true" [checkbox]="true" formControlName="hospitais" optionLabel="nome" optionValue="id"></p-listbox>
+    </div>
+    <br>
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="submit" label="Criar Profissional" class="p-button-success"></button>
+    </div>
+    <br>
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="button" (click)="inicio()" (click)="resetForm()" label="Voltar"
+        class="p-button-info"></button>
+    </div>
+  </form>
+</div>

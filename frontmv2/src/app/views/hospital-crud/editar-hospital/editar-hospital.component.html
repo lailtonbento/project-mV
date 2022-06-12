@@ -1,0 +1,48 @@
+<div class="container">
+  <form class="px-8 py-1" [formGroup]="hospitalFormulario" (ngSubmit)="editFormSubmit()">
+    <div class="p-fluid">
+      <h4>Nome</h4>
+      <span class="p-input-icon-right">
+        <input type="text" value="{{ hospital.nome }}" formControlName="nome" pInputText />
+      </span>
+    </div>
+    <div class="p-fluid">
+      <h4>Telefone</h4>
+      <span class="p-input-icon-right">
+        <input type="text" value="{{ hospital.telefone }}" pInputText formControlName="telefone" />
+      </span>
+    </div>
+
+    <h3>Endereço</h3>
+    <div class="p-grid p-fluid">
+      <div class="my-2 p-inputgroup">
+        <label for="rua" class="p-inputgroup-addon">Rua</label>
+        <input type="text" value="{{ hospital.endereco?.rua }}" id="rua" formControlName="rua" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="numero" class="p-inputgroup-addon">Numero</label>
+        <input type="text" value="{{ hospital.endereco?.numero }}" id="numero" formControlName="numero" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="bairro" class="p-inputgroup-addon">Bairro</label>
+        <input type="text" value="{{ hospital.endereco?.bairro }}" id="bairro" formControlName="bairro" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="cidade" class="p-inputgroup-addon">Cidade</label>
+        <input type="text" value="{{ hospital.endereco?.cidade }}" id="cidade" formControlName="cidade" pInputText />
+      </div>
+      <div class="my-2 p-inputgroup">
+        <label for="estado" class="p-inputgroup-addon">UF</label>
+        <input type="text" value="{{ hospital.endereco?.estado }}" id="estado" formControlName="estado" pInputText />
+      </div>
+    </div>
+    <br>
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="submit" label="Editar Hospital" class="p-button-success"></button>
+    </div>
+    <br>
+    <div class="mx-8 mt-4 p-fluid">
+      <button pButton pRipple type="button" (click)="inicio()" label="Voltar" class="p-button-info"></button>
+    </div>
+  </form>
+</div>
