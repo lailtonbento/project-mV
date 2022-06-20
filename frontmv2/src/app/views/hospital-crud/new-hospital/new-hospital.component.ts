@@ -16,7 +16,6 @@ export class NewHospitalComponent implements OnInit {
 
   hospitalFormulario: FormGroup;
   hospital: Hospital;
-  profissionais: Profissional[]
   
   constructor(
     private router: Router,

@@ -32,7 +32,7 @@
       <td>{{profissional.nome}}</td>
       <td>{{profissional.telefone}}</td>
       <td>{{profissional.cargo}}</td>
-      <td>{{profissional.endereco?.rua}} {{profissional.endereco?.numero}} {{profissional.endereco?.bairro}} {{profissional.endereco?.cidade}} {{profissional.endereco?.estado}}</td>
+      <td>{{profissional.endereco?.rua}}, {{profissional.endereco?.numero}} - {{profissional.endereco?.bairro}} | {{profissional.endereco?.cidade}} - {{profissional.endereco?.estado}}</td>
       <td >
         <button pButton pRipple icon="pi pi-search" label="Ver" class="p-button-rounded p-button-info"
           (click)="viewProfissional(profissional)"></button>

@@ -6,7 +6,11 @@ export class ProfissionalDTO {
     public nome: string
     public telefone: string
     public cargo: string
-    public endereco: Endereco
+    public rua: string
+    public numero: string
+    public bairro: string
+    public cidade: string
+    public estado: string
 
     public hospitais: Hospital[]
 }

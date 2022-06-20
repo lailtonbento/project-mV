@@ -63,7 +63,7 @@ export class NewProfissionalComponent implements OnInit {
 
   getHospitais() {
     this.hospitalService.findAllPageable().subscribe(response => {
-      this.hospitais = response.content;
+      this.hospitais = response.content.map(hospital => Hospital.fromDTO(hospital));
     })
   }
 

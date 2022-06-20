@@ -34,13 +34,15 @@ export class ViewProfissionalComponent implements OnInit {
   }
   async setProfissionalByUrlParam() {
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
-    this.profissional = await this.profissionalService.getProfissionalById(id).toPromise()
+   this.profissional = Profissional.fromDTO(
+      await this.profissionalService.getProfissionalById(id).toPromise()
+    )
     //this.profissionalService.getProfissionalById(id).subscribe((resp) => this.profissional = Profissional.fromDTO(resp))
   
   }
   getHospitais() {
     this.hospitalService.findAllPageable().subscribe(response => {
-      this.hospitais = response.content;
+      this.hospitais = response.content.map(hospital => Hospital.fromDTO(hospital));
     })
   }
   

@@ -37,7 +37,11 @@ public class Hospital {
 				.nome(nome)
 				.telefone(telefone)
 				.profissionais(profissionais)
-				.endereco(endereco)
+				.rua(endereco.getRua())
+				.numero(endereco.getNumero())
+				.bairro(endereco.getBairro())
+				.cidade(endereco.getCidade())
+				.estado(endereco.getEstado())
 				.build();
 	}
 

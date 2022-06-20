@@ -27,19 +27,20 @@ export class EditProfissionalComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.profissional = new Profissional();
-    this.profissionalFormulario = new FormGroup({
-      nome: new FormControl(''),
-      telefone: new FormControl(''),
-      cargo: new FormControl(''),
-      rua: new FormControl(''),
-      numero: new FormControl(''),
-      bairro: new FormControl(''),
-      cidade: new FormControl(''),
-      estado: new FormControl(''),
-      hospitais: new FormControl([])
+    this.setProfissionalByUrlParam().finally(() => {
+      console.log(this.profissional)
+      this.profissionalFormulario = new FormGroup({
+        nome: new FormControl(this.profissional.nome || ''),
+        telefone: new FormControl(this.profissional.telefone || ''),
+        cargo: new FormControl(this.profissional.cargo || ''),
+        rua: new FormControl(this.profissional.endereco.rua || ''),
+        numero: new FormControl(this.profissional.endereco.numero || ''),
+        bairro: new FormControl(this.profissional.endereco.bairro || ''),
+        cidade: new FormControl(this.profissional.endereco.cidade || ''),
+        estado: new FormControl(this.profissional.endereco.estado || ''),
+        hospitais: new FormControl(this.profissional.hospitais.map(hospital => hospital.id))
+      });
     });
-    this.setProfissionalByUrlParam();
-
   }
   ngOnInit(): void {
     this.getHospitais();
@@ -48,6 +49,7 @@ export class EditProfissionalComponent implements OnInit {
 
   editFormSubmit() {
     let profissional: Profissional = this.profissionalFormulario.value;
+    profissional.hospitais = this.profissionalFormulario.value.hospitais.map(id => Hospital.withId(id))
     profissional.endereco = {
       rua: this.profissionalFormulario.value.rua,
       bairro: this.profissionalFormulario.value.bairro,
@@ -57,15 +59,13 @@ export class EditProfissionalComponent implements OnInit {
     };
     console.log(this.profissionalFormulario.value.hospitais)
     console.log(this.hospitaisSelecionados)
-    profissional.hospitais = this.profissionalFormulario.value.hospitais.map(id => ({ id }))
+
     this.profissionalService.update(this.getIdFromUrl(), profissional).subscribe(() => {
       this.messageService.add({ severity: 'success', summary: 'Bem-sucedido', detail: 'Profissional editado com sucesso', life: 3000 })
     });
     this.inicio();
   }
   setHospitais() {
-    this.hospitaisSelecionados = (this.profissionalFormulario.value.hospitais as number[]).map(id => ({ id }))
-    console.log(this.profissionalFormulario.value)
     this.profissionalFormulario.patchValue({
       hospitais: this.hospitaisSelecionados
     });
@@ -75,7 +75,7 @@ export class EditProfissionalComponent implements OnInit {
   }
   getHospitais() {
     this.hospitalService.findAllPageable().subscribe(response => {
-      this.hospitais = response.content;
+      this.hospitais = response.content.map(hospital => Hospital.fromDTO(hospital));
     })
   }
 
@@ -87,7 +87,7 @@ export class EditProfissionalComponent implements OnInit {
       hospitais: profissional.hospitais.map(hospital => hospital.id)
     }
     )
-    
+
     // this.profissionalService.getProfissionalById(id).subscribe(
     // (profissional) => {
     //    this.setFormProfissional(Profissional.fromDTO(profissional))
@@ -97,7 +97,6 @@ export class EditProfissionalComponent implements OnInit {
   getIdFromUrl(): number {
     return Number(this.route.snapshot.paramMap.get('id'));
   }
-
 
   inicio() {
     this.router.navigateByUrl('profissionais');

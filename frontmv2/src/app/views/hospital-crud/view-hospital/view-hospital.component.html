@@ -31,10 +31,6 @@
         <input type="text" readonly [disabled]="true" value="{{ hospital.endereco?.estado }}" id="estado" pInputText />
       </div>
     </div>
-    <div class="p-fluid">
-      <h4>Profissionais</h4>
-      <p-listbox [options]="hospital.profissionais" [filter]="true" [readonly]="true" optionLabel="nome"></p-listbox>
-    </div>
     <br />
     <div class="mx-8 mt-4 p-fluid">
       <button pButton pRipple type="button" (click)="inicio()" label="Voltar" class="p-button-info"></button>

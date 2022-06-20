@@ -7,40 +7,37 @@ import { ProfissionalService } from '../../../service/profissional/profissional.
 @Component({
   selector: 'app-list-profissional',
   templateUrl: './list-profissional.component.html',
-  styleUrls: ['./list-profissional.component.scss']
+  styleUrls: ['./list-profissional.component.scss'],
 })
 export class ListProfissionalComponent implements OnInit {
-
-  
   constructor(
-    private router : Router,
+    private router: Router,
     private profissionalService: ProfissionalService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
-  ) { 
+  ) {
     this.getProfissionais();
   }
 
-  ngOnInit(): void {
-  }
-  profissionais : Profissional[] = []
-  profissional: Profissional
+  ngOnInit(): void { }
+  profissionais: Profissional[] = [];
+  profissional: Profissional;
 
   getProfissionais(page = 0, size = 10) {
-    this.profissionalService.findAllPageable().subscribe(response => {
-      this.profissionais = response.content;
-    })
+    this.profissionalService.findAllPageable().subscribe((response) => {
+      this.profissionais = response.content.map(profissional => Profissional.fromDTO(profissional))
+    });
   }
 
-  newProfissional(){
+  newProfissional() {
     this.router.navigateByUrl('/profissionais/new');
   }
-  editProfissional(profissional: Profissional){
-    this.router.navigateByUrl(`/profissionais/edit/${profissional.id}`)
+  editProfissional(profissional: Profissional) {
+    this.router.navigateByUrl(`/profissionais/edit/${profissional.id}`);
   }
-  viewProfissional(profissional: Profissional){
-    this.profissional = profissional
-    this.router.navigateByUrl(`/profissionais/view/${profissional.id}`)
+  viewProfissional(profissional: Profissional) {
+    this.profissional = profissional;
+    this.router.navigateByUrl(`/profissionais/view/${profissional.id}`);
   }
 
   deleteProfissional(profissional: Profissional) {
@@ -53,11 +50,14 @@ export class ListProfissionalComponent implements OnInit {
       accept: () => {
         this.profissionalService.deleteById(profissional.id!).subscribe(() => {
           this.getProfissionais();
-          this.messageService.add({ severity: 'success', summary: 'Bem-sucedido', detail: 'Profissional Deletado', life: 2000 })
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Bem-sucedido',
+            detail: 'Profissional Deletado',
+            life: 2000,
+          });
         });
-      }
-    
+      },
     });
   }
-  
 }

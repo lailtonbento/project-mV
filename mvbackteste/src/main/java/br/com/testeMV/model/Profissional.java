@@ -46,7 +46,11 @@ public class Profissional {
 				.telefone(telefone)
 				.cargo(cargo)
 				.hospitais(hospitais)
-				.endereco(endereco)
+				.rua(endereco.getRua())
+				.numero(endereco.getNumero())
+				.bairro(endereco.getBairro())
+				.cidade(endereco.getCidade())
+				.estado(endereco.getEstado())
 				.build();
 	}
 }

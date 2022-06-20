@@ -12,19 +12,19 @@ import { HospitalService } from 'src/app/service/hospital/hospital.service';
 })
 export class EditarHospitalComponent implements OnInit {
 
-  
+
   hospitalFormulario: FormGroup;
   hospital: Hospital;
 
   constructor(
-    private router : Router,
+    private router: Router,
     private route: ActivatedRoute,
     private hospitalService: HospitalService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {
-    
     this.hospital = new Hospital();
+    this.setHospitalByUrlParam()
     this.hospitalFormulario = new FormGroup({
       nome: new FormControl(''),
       telefone: new FormControl(''),
@@ -32,10 +32,11 @@ export class EditarHospitalComponent implements OnInit {
       numero: new FormControl(''),
       bairro: new FormControl(''),
       cidade: new FormControl(''),
-      estado: new FormControl('')
+      estado: new FormControl( ''),
     });
-    this.setHospitalByUrlParam();
-    
+
+
+
   }
   ngOnInit(): void {
   }
@@ -54,32 +55,32 @@ export class EditarHospitalComponent implements OnInit {
     });
     console.log(this.hospitalFormulario.value)
     this.inicio();
-}
+  }
 
-setFormHospital(hospital : Hospital) {
-  this.hospitalFormulario.patchValue({
-    nome: hospital.nome,
-    telefone: hospital.telefone,
-    rua: hospital.endereco?.rua,
-    bairro: hospital.endereco?.bairro,
-    numero: hospital.endereco?.numero,
-    cidade: hospital.endereco?.cidade,
-    estado: hospital.endereco?.estado
-  })
-  this.hospital = hospital;
-}
+  setFormHospital(hospital: Hospital) {
+    this.hospitalFormulario.patchValue({
+      nome: hospital.nome,
+      telefone: hospital.telefone,
+      rua: hospital.endereco?.rua,
+      bairro: hospital.endereco?.bairro,
+      numero: hospital.endereco?.numero,
+      cidade: hospital.endereco?.cidade,
+      estado: hospital.endereco?.estado
+    })
+    this.hospital = hospital;
+  }
 
-setHospitalByUrlParam() {
-  const id: number = this.getIdFromUrl();
-  this.hospitalService.getHospitalById(id).subscribe((hospital) => { this.setFormHospital(Hospital.fromDTO(hospital))});
-}
+  setHospitalByUrlParam() {
+    const id: number = this.getIdFromUrl();
+    this.hospitalService.getHospitalById(id).subscribe((hospital) => { this.setFormHospital(Hospital.fromDTO(hospital)) });
+  }
 
-getIdFromUrl(): number {
-  return Number(this.route.snapshot.paramMap.get('id'));
-}
+  getIdFromUrl(): number {
+    return Number(this.route.snapshot.paramMap.get('id'));
+  }
 
 
-inicio (){
+  inicio() {
     this.router.navigateByUrl('hospitais');
   }
 

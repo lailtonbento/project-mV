@@ -39,8 +39,6 @@ public class ProfissionalDTO {
 	@NotNull(message = "estado não pode estar nulo")
 	private String estado;
 
-
-	private Endereco endereco;
 	public Set<Hospital> hospitais = new HashSet<>();
 
 	public Profissional toEntity() {
